@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:c="http://www.springframework.org/schema/c"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	<bean id="singer" class="ch3.Singer" scope="prototype"/>
+	
+	<bean id="abstractLookupBean" class="ch3.AbstractLookupDemoBean">
+		<lookup-method name="getMySinger" bean="singer"/>
+	</bean>
+	
+	<bean id="standardLookupBean" class="ch3.StandardLookupDemoBean" p:mySinger-ref="singer"/>
+	
+	<bean id="methodReplacer" class="ch3.FormatMessageReplacer"/>
+	
+	<bean id="replacementTarget" class="ch3.ReplacementTarget">
+		<replaced-method name="formatMessage" replacer="methodReplacer">
+			<arg-type>String</arg-type>
+		</replaced-method>
+	</bean>
+	
+	<bean id="standardTarget" class="ch3.ReplacementTarget"/>
+</beans>
