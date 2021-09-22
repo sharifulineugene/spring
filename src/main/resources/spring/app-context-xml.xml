@@ -6,22 +6,15 @@
     xmlns:context="http://www.springframework.org/schema/context"
     xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
-	<bean id="singer" class="ch3.Singer" scope="prototype"/>
-	
-	<bean id="abstractLookupBean" class="ch3.AbstractLookupDemoBean">
-		<lookup-method name="getMySinger" bean="singer"/>
-	</bean>
-	
-	<bean id="standardLookupBean" class="ch3.StandardLookupDemoBean" p:mySinger-ref="singer"/>
-	
-	<bean id="methodReplacer" class="ch3.FormatMessageReplacer"/>
-	
-	<bean id="replacementTarget" class="ch3.ReplacementTarget">
-		<replaced-method name="formatMessage" replacer="methodReplacer">
-			<arg-type>String</arg-type>
-		</replaced-method>
-	</bean>
-	
-	<bean id="standardTarget" class="ch3.ReplacementTarget"/>
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+
+	default-lazy-init="true">
+
+	<context:annotation-config/>
+
+	<bean id="singerOne" class="ch4.SingerWithJSR250"  p:name="John Mayer" p:age="39"/>
+
+	<bean id="singerTwo" class="ch4.SingerWithJSR250"  p:age="72"/>
+
+	<bean id="singerThree" class="ch4.SingerWithJSR250"  p:name="John Butler"/>
 </beans>
